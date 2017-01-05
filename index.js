@@ -21,6 +21,38 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.listen((process.env.PORT || 3000));
 
+//WIT.AI
+const firstEntityValue = (entities, entity) => {
+  const val = entities && entities[entity] &&
+    Array.isArray(entities[entity]) &&
+    entities[entity].length > 0 &&
+    entities[entity][0].value
+  ;
+  if (!val) {
+    return null;
+  }
+  return typeof val === 'object' ? val.value : val;
+};
+
+const actions = {
+  send(request, response) {
+    const {sessionId, context, entities} = request;
+    const {text, quickreplies} = response;
+    console.log('sending...', JSON.stringify(response));
+  },
+  getForecast({context, entities}) {
+    var location = firstEntityValue(entities, 'location');
+    if (location) {
+      context.forecast = 'sunny in ' + location; // we should call a weather API here
+      delete context.missingLocation;
+    } else {
+      context.missingLocation = true;
+      delete context.forecast;
+    }
+    return context;
+  },
+};
+
 // Server frontpage
 app.get('/', function (req, res) {
     res.send('This is TestBot Server');
@@ -116,42 +148,12 @@ function kittenMessage(recipientId, text) {
     
 };
 
-//WIT.AI
-const firstEntityValue = (entities, entity) => {
-  const val = entities && entities[entity] &&
-    Array.isArray(entities[entity]) &&
-    entities[entity].length > 0 &&
-    entities[entity][0].value
-  ;
-  if (!val) {
-    return null;
-  }
-  return typeof val === 'object' ? val.value : val;
-};
 
-const actions = {
-  send(request, response) {
-    const {sessionId, context, entities} = request;
-    const {text, quickreplies} = response;
-    console.log('sending...', JSON.stringify(response));
-  },
-  getForecast({context, entities}) {
-    var location = firstEntityValue(entities, 'location');
-    if (location) {
-      context.forecast = 'sunny in ' + location; // we should call a weather API here
-      delete context.missingLocation;
-    } else {
-      context.missingLocation = true;
-      delete context.forecast;
-    }
-    return context;
-  },
-};
 
 //if (require.main === module) {
   //console.log("Bot testing mode.");
-  const client = new Wit({accessToken, actions});
-  interactive(client);
+ // const client = new Wit({accessToken, actions});
+  //interactive(client);
 //}else {
    // console.log('required as a module');
 //}
