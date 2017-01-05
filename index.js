@@ -7,16 +7,16 @@ var app = express();
 //const {Wit, log} = require('node-wit');
 
 const accessToken = '4UWV4QHZ2KWYUMUYO7VRPUVLFIA5YB7M';
-let Wit = null;
-let interactive = null;
-try {
+var Wit = require('node-wit').Wit;
+var interactive = require('node-wit').interactive;
+/*try {
   // if running from repo
   Wit = require('../').Wit;
   interactive = require('../').interactive;
 } catch (e) {
   Wit = require('node-wit').Wit;
   interactive = require('node-wit').interactive;
-}
+}*/
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
