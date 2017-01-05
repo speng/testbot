@@ -5,7 +5,7 @@ var app = express();
 //var WIT_TOKEN = '4UWV4QHZ2KWYUMUYO7VRPUVLFIA5YB7M';
 //const {Wit, log} = require('node-wit');
 
-const accessToken = '4UWV4QHZ2KWYUMUYO7VRPUVLFIA5YB7M';
+var accessToken = '4UWV4QHZ2KWYUMUYO7VRPUVLFIA5YB7M';
 var Wit = require('node-wit').Wit;
 var interactive = require('node-wit').interactive;
 /*try {
