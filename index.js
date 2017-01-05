@@ -75,8 +75,9 @@ app.post('/webhook', function (req, res) {
         if (event.message && event.message.text) {
             if (!kittenMessage(event.sender.id, event.message.text)) {
 				//sendMessage(event.sender.id, {text: "Echo: " + event.message.text});
-				const client = new Wit({accessToken, actions.send(req,event.message.text)});
-				interactive(client);
+				const client = new Wit({accessToken, actions});
+				client.interactive();
+				//interactive(client);
 			}
         }else if (event.postback) {
 			console.log("Postback received: " + JSON.stringify(event.postback));
