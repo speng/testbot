@@ -1,9 +1,10 @@
+'use strict';
 var express = require('express');
 var bodyParser = require('body-parser');
 var request = require('request');
 var app = express();
-var WIT_TOKEN = '4UWV4QHZ2KWYUMUYO7VRPUVLFIA5YB7M';
-const {Wit, log} = require('node-wit');
+//var WIT_TOKEN = '4UWV4QHZ2KWYUMUYO7VRPUVLFIA5YB7M';
+//const {Wit, log} = require('node-wit');
 
 const accessToken = '4UWV4QHZ2KWYUMUYO7VRPUVLFIA5YB7M';
 let Wit = null;
