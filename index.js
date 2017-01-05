@@ -75,8 +75,9 @@ app.post('/webhook', function (req, res) {
         if (event.message && event.message.text) {
             if (!kittenMessage(event.sender.id, event.message.text)) {
 				//sendMessage(event.sender.id, {text: "Echo: " + event.message.text});
-				const client = new Wit({accessToken, actions});
-				interactive(client);
+				//const client = new Wit({accessToken, actions});
+				//interactive(client);
+				witMessage(event.sender.id, event.message.text);
 			}
         }else if (event.postback) {
 			console.log("Postback received: " + JSON.stringify(event.postback));
@@ -88,7 +89,7 @@ app.post('/webhook', function (req, res) {
 // generic function sending messages
 function sendMessage(recipientId, message) {
     request({
-        url: 'https://graph.facebook.com/v2.6/me/messages',
+        url: 'https://graph.facebook.com/v2.8/me/messages',
         qs: {access_token: 'EAAKSZAdNMP5UBAMj5STZBDZBNvWHPFBu9ZBVHb3OTQR7zD2etPlVWsZBpTRIEj7viMUPYjDZCe4ZBnxN5s9eW7jZCa35ic2ZAL1WfYfIHeJRQ6lDtvNddvqvC9CZBRd1ZBYNJUmR4UFqNvlg9PxIF3HAzhgCDVDXrTQDTZCMrxNqgQ2k9AZDZD'},
         method: 'POST',
         json: {
@@ -148,12 +149,31 @@ function kittenMessage(recipientId, text) {
     
 };
 
+// send rich message with kitten
+function witMessage(recipientId, text) {
+var message = request({
+	url: 'https://api.wit.ai/message',
+	data: {'q': text,
+			'access_token' : accessToken},
+	method: 'GET',
+	 dataType: 'jsonp',
+}, function(error, response, body) {
+	if (error) {
+		console.log('Error sending message: ', error);
+	} else if (response.body.error) {
+		console.log('Error: ', response.body.error);
+	}
+});
 
+sendMessage(recipientId, message);
+
+return true; 
+};
 
 //if (require.main === module) {
   //console.log("Bot testing mode.");
- // const client = new Wit({accessToken, actions});
-  //interactive(client);
+  const client = new Wit({accessToken, actions});
+  interactive(client);
 //}else {
    // console.log('required as a module');
 //}
