@@ -146,10 +146,10 @@ const actions = {
   },
 };
 
-if (require.main === module) {
-  console.log("Bot testing mode.");
+//if (require.main === module) {
+  //console.log("Bot testing mode.");
   const client = new Wit({accessToken, actions});
   interactive(client);
-}else {
-    console.log('required as a module');
-}
+//}else {
+   // console.log('required as a module');
+//}
