@@ -174,6 +174,9 @@ function witMessage(recipientId, text) {
 		success: function(response) {
 		  console.log("success!", response);
 		  sendMessage(recipientId, response);
+		},
+		error: function(response){
+			console.log("ERROR!", response);
 		}
 	});
     }
