@@ -1,5 +1,3 @@
-'use strict';
-
 var express = require('express');
 var bodyParser = require('body-parser');
 var request = require('request');
@@ -83,7 +81,7 @@ function kittenMessage(recipientId, text) {
             
             var imageUrl = "http://placekitten.com/g/" + Number(values[1]) + "/" + Number(values[2]);
             
-            message = {
+            var message = {
                 "attachment": {
                     "type": "template",
                     "payload": {
