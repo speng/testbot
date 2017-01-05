@@ -1,4 +1,5 @@
 var $ = require('jquery');
+var jsdom = require('jsdom');
 var express = require('express');
 var bodyParser = require('body-parser');
 var request = require('request');
@@ -152,7 +153,17 @@ function kittenMessage(recipientId, text) {
 
 // send rich message with kitten
 function witMessage(recipientId, text) {
-	$.ajax({
+	
+	
+
+	var html = '<html><body></body></html>';
+
+  jsdom.env({
+    html: html,
+    scripts: ['https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.js'],
+    done: function storeId(err, window) {
+      var $ = window.jQuery;
+      $.ajax({
 		url: 'https://api.wit.ai/message',
 		data: {
 		'q': text,
@@ -165,8 +176,9 @@ function witMessage(recipientId, text) {
 		  sendMessage(recipientId, response);
 		}
 	});
-	
-
+    }
+  });
+  
 };
 
 //if (require.main === module) {
