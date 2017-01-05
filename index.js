@@ -151,23 +151,21 @@ function kittenMessage(recipientId, text) {
 
 // send rich message with kitten
 function witMessage(recipientId, text) {
-var message = request({
-	url: 'https://api.wit.ai/message',
-	data: {'q': text,
-			'access_token' : accessToken},
-	method: 'GET',
-	 dataType: 'jsonp',
-}, function(error, response, body) {
-	if (error) {
-		console.log('Error sending message: ', error);
-	} else if (response.body.error) {
-		console.log('Error: ', response.body.error);
-	}
-});
+	$.ajax({
+		url: 'https://api.wit.ai/message',
+		data: {
+		'q': text,
+		'access_token' : accessToken
+		},
+		dataType: 'jsonp',
+		method: 'GET',
+		success: function(response) {
+		  console.log("success!", response);
+		  sendMessage(recipientId, response);
+		}
+	});
+	
 
-sendMessage(recipientId, message);
-
-return true; 
 };
 
 //if (require.main === module) {
