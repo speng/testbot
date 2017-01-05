@@ -115,7 +115,7 @@ function kittenMessage(recipientId, text) {
 };
 
 //WIT.AI
-/*const firstEntityValue = (entities, entity) => {
+const firstEntityValue = (entities, entity) => {
   const val = entities && entities[entity] &&
     Array.isArray(entities[entity]) &&
     entities[entity].length > 0 &&
@@ -146,5 +146,5 @@ const actions = {
   },
 };
 
-const client = new Wit({accessToken, actions});
+/*const client = new Wit({accessToken, actions});
 interactive(client);*/
