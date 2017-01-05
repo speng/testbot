@@ -146,5 +146,5 @@ const actions = {
   },
 };
 
-//const client = new Wit({accessToken, actions});
+var client = new Wit({accessToken, actions});
 //interactive(client);
