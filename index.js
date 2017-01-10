@@ -18,6 +18,7 @@ var accessToken = '4UWV4QHZ2KWYUMUYO7VRPUVLFIA5YB7M';
 //var interactive = require('node-wit').interactive;
 let Wit = null;
 let log = null;
+let interactive = null;
 try {
   // if running from repo
   Wit = require('../').Wit;
@@ -25,6 +26,7 @@ try {
 } catch (e) {
   Wit = require('node-wit').Wit;
   log = require('node-wit').log;
+  interactive = require('node-wit').interactive;
 }
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
@@ -106,6 +108,17 @@ const actions = {
       // Giving the wheel back to our bot
       return Promise.resolve()
     }
+  },
+  getForecast({context, entities}) {
+    var location = firstEntityValue(entities, 'location');
+    if (location) {
+      context.forecast = 'sunny in ' + location; // we should call a weather API here
+      delete context.missingLocation;
+    } else {
+      context.missingLocation = true;
+      delete context.forecast;
+    }
+    return context;
   },
   // You should implement your custom actions here
   // See https://wit.ai/docs/quickstart
@@ -313,8 +326,8 @@ function witMessage(recipientId, text) {
 
 //if (require.main === module) {
   //console.log("Bot testing mode.");
-  //const client = new Wit({accessToken, actions});
-  //interactive(client);
+  const client = new Wit({accessToken, actions});
+  interactive(client);
 //}else {
    // console.log('required as a module');
 //}
