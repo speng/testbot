@@ -79,7 +79,7 @@ app.post('/webhook', function (req, res) {
 				//sendMessage(event.sender.id, {text: "Echo: " + event.message.text});
 				//const client = new Wit({accessToken, actions});
 				//interactive(client);
-				console.log("Senf witMessage:" + event.message.text);
+				console.log("Send witMessage:" + event.message.text);
 				witMessage(event.sender.id, event.message.text);
 			}
         }else if (event.postback) {
@@ -155,7 +155,7 @@ function kittenMessage(recipientId, text) {
 // send rich message with kitten
 function witMessage(recipientId, text) {
 	var html = '<html><body></body></html>';
-
+	console.log("inside witMessage text:" + text);
   jsdom.env({
     html: html,
     scripts: ['https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.js'],
