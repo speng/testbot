@@ -313,8 +313,8 @@ function witMessage(recipientId, text) {
 
 //if (require.main === module) {
   //console.log("Bot testing mode.");
-  const client = new Wit({accessToken, actions});
-  interactive(client);
+  //const client = new Wit({accessToken, actions});
+  //interactive(client);
 //}else {
    // console.log('required as a module');
 //}
