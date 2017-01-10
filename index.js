@@ -79,6 +79,7 @@ app.post('/webhook', function (req, res) {
 				//sendMessage(event.sender.id, {text: "Echo: " + event.message.text});
 				//const client = new Wit({accessToken, actions});
 				//interactive(client);
+				console.log("Senf witMessage:" + event.message.text);
 				witMessage(event.sender.id, event.message.text);
 			}
         }else if (event.postback) {
@@ -153,9 +154,6 @@ function kittenMessage(recipientId, text) {
 
 // send rich message with kitten
 function witMessage(recipientId, text) {
-	
-	
-
 	var html = '<html><body></body></html>';
 
   jsdom.env({
