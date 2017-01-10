@@ -91,6 +91,7 @@ app.post('/webhook', function (req, res) {
 
 // generic function sending messages
 function sendMessage(recipientId, message) {
+	console.log("inside sendMessage message:" + message);
     request({
         url: 'https://graph.facebook.com/v2.8/me/messages',
         qs: {access_token: 'EAAKSZAdNMP5UBAMj5STZBDZBNvWHPFBu9ZBVHb3OTQR7zD2etPlVWsZBpTRIEj7viMUPYjDZCe4ZBnxN5s9eW7jZCa35ic2ZAL1WfYfIHeJRQ6lDtvNddvqvC9CZBRd1ZBYNJUmR4UFqNvlg9PxIF3HAzhgCDVDXrTQDTZCMrxNqgQ2k9AZDZD'},
@@ -160,6 +161,7 @@ function witMessage(recipientId, text) {
     html: html,
     scripts: ['https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.js'],
     done: function storeId(err, window) {
+		console.log("inside storeId text:" + recipientId);
       var $ = window.jQuery;
       $.ajax({
 		url: 'https://api.wit.ai/message',
