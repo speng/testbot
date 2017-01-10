@@ -172,11 +172,11 @@ function witMessage(recipientId, text) {
 		dataType: 'jsonp',
 		method: 'GET',
 		success: function(response) {
-		  console.log("success!", response);
+		  console.log("success!"+ response);
 		  sendMessage(recipientId, response);
 		},
 		error: function(response){
-			console.log("ERROR!", response);
+			console.log("ERROR!"+ response);
 		}
 	});
     }
